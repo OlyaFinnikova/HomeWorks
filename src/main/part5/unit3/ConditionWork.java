@@ -7,6 +7,7 @@ public class ConditionWork {
      *@return условие работы или не работы
      */
     public boolean checkCondition(String[] array){
+
         if (checkZero(array) && checkOne(array)){
             return true;
         }
