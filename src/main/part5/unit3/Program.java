@@ -1,36 +1,20 @@
 package part5.unit3;
+
 /**
- *Выводит статус работы
+ * Выводит статус работы
  */
 public class Program {
 
     private IStatus status;
-    private ConditionWork conditionWork = new ConditionWork();
     private UserValue userValue = new UserValue();
-
-    public String start(){
-        String[] values = userValue.getUserValue();
-        determineStatus(values);
-        return work();
-    }
-
     public void setStatus(IStatus status) {
         this.status = status;
     }
     /**
-     *Присваивает нужный статус
+     * Выполняет действие в завсимости от статуса
      */
-    public void determineStatus(String[] userValues) {
-        if (conditionWork.checkCondition(userValues)) {
-            setStatus(new StatusON());
-        } else {
-            setStatus(new StatusOFF());
-        }
-    }
-    /**
-     *@return статус работы
-     */
-    public String work() {
-        return status.work();
+    public void doSomething() {
+       status.doSomething(this, userValue.getUserValue());
     }
 }
+
