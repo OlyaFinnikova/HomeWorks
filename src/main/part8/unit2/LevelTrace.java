@@ -14,8 +14,8 @@ public class LevelTrace {
     public LevelTrace() {
     }
 
-    public LevelTrace(String name, int level) {
-        this.name = name;
+    public LevelTrace(String message, int level) {
+        this.name = message;
         this.level = level;
     }
 
@@ -36,15 +36,9 @@ public class LevelTrace {
     }
 
     static {
-        off = new LevelTrace("OFF", 0);
-        error = new LevelTrace("ERROR", 1);
-        debug = new LevelTrace("DEBUG", 2);
-        all = new LevelTrace("ALL", 3);
+        off = new LevelTrace("OFF" + new Date(), 0);
+        error = new LevelTrace("ERROR " + new Date(), 1);
+        debug = new LevelTrace("DEBUG " + new Date(), 2);
+        all = new LevelTrace("ALL " + new Date(), 3);
     }
-
-    public LevelTrace[] trace = new LevelTrace[]{
-           off,
-           error,
-           debug,
-           all};
 }

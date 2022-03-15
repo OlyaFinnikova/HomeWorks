@@ -1,27 +1,21 @@
 package part8.unit2;
 
-import java.util.Date;
+import java.util.Map;
 
 public class Logger {
 
-    public void log (LevelTrace[] trace,int log){
-        System.out.println("Введите куда записывать информацию.");
-        int valueUser = new UserValue().getUserPlace();
-        if (valueUser == 1) {
-            System.out.println(getLog(trace,log));
-        } else {
-        new WritingInFile().writeFile(getLog(trace,log),new WritingInFile().textFile);
-        }
+    private static Map<String, String> map = new ReadingFromFile().read();
+    private static LevelTrace levelTrace = new GettingLoggingParameter().getKey(map);
+    private static Writing writer = new GettingRecordingParameter().getKey(map);
+
+    public static void init(LevelTrace levelTrace, Writing writer) {
+        Logger.levelTrace = levelTrace;
+        Logger.writer = writer;
     }
 
-
-    private String getLog (LevelTrace[] expectedInformation, int actualInformation) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < actualInformation; i++) {
-            if (expectedInformation[i].getLevel()>=actualInformation){
-                builder.append(expectedInformation[i].getName()).append(new Date().getTime()).append("\n");
-            }
+    public void log(LevelTrace trace, String message) {
+        if (Logger.levelTrace.getLevel() >= trace.getLevel()) {
+            writer.write(message);
         }
-        return builder.toString();
     }
 }
